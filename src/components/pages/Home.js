@@ -1,11 +1,10 @@
 import React from "react";
+import SearchForm from "../SearchForm"
 
 function Home(){
     
     return(
-        <div>
-            <p>Bungholio</p>
-        </div>
+        <SearchForm />
     )
 };
 
