@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SearchForm from "./SearchForm";
+import TableRow from "./TableRow";
 import API from "../utils/API";
 
 class EmployeeDirectory extends Component {
@@ -12,7 +13,6 @@ class EmployeeDirectory extends Component {
     componentDidMount() {
         API.search()
             .then(({ data }) => {
-                // console.log(data);
                 this.setState({ result: data.results, display: data.results });
             })
             .catch(err => console.log(err))
@@ -43,11 +43,7 @@ class EmployeeDirectory extends Component {
                 handleFormSubmit={this.handleFormSubmit}
                 handleInputChange={this.handleInputChange}
             />
-            {this.state.display.map(result => {
-                return(
-                    <p>{result.name.first}</p>
-                )
-            })}
+            <TableRow display={this.state.display}/>
         </>
         )
     }

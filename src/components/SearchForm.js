@@ -10,7 +10,7 @@ function SearchForm(props) {
             name="search"
             type="text"
             onChange={props.handleInputChange}
-            className=""
+            className="form-control"
             placeholder="Search..."
             id="name"
           />
