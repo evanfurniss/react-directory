@@ -8,7 +8,8 @@ class EmployeeDirectory extends Component {
     state = {
         result: [],
         display: [],
-        search: ""
+        search: "",
+        sort: "ascending"
     };
 
     componentDidMount() {
@@ -21,14 +22,36 @@ class EmployeeDirectory extends Component {
 
     searchDirectory = (query) => {
         const searching = query.toLowerCase().trim();
-        const searchResults = [];
-        this.state.display.filter(({ display }) => {
-            if(display.name.first === searching || display.name.last === searching || display.email === searching || display.cell === searching){
-                searchResults.push(display);
-            };
-            return searchResults;
+        let searchResults = this.state.result.filter(result => {
+            return (result.name.first + result.name.last + result.email + result.cell).includes(searching)
         });
-        return(searchResults);
+        if(this.state.sort == "ascending"){
+            console.log("ascending");
+            searchResults = searchResults.sort((a,b)=>{
+                return(a.email.localeCompare(b.email));
+            });
+        } else {
+            console.log("descending");
+            searchResults = searchResults.sort((a,b)=> {
+                return(b.email.localeCompare(a.email));
+            });
+        };
+        this.setState({
+            display: searchResults
+        });
+    };
+
+    handleSort = () => {
+        this.searchDirectory(this.state.search)
+        if(this.state.sort == "ascending") {
+            this.setState({
+                sort: "descending"
+            });
+        } else {
+            this.setState({
+                sort: "ascending"
+            });
+        };
     };
 
     handleInputChange = event => {
@@ -41,8 +64,7 @@ class EmployeeDirectory extends Component {
 
     handleFormSubmit = e => {
         e.preventDefault();
-        console.log();
-        this.searchDirectory(e.target.value);
+        this.searchDirectory(this.state.search);
     };
 
     render() {
@@ -53,6 +75,7 @@ class EmployeeDirectory extends Component {
                 handleFormSubmit={this.handleFormSubmit}
                 handleInputChange={this.handleInputChange}
             />
+            <button onClick={this.handleSort} className="btn btn-primary">Sort by email</button>
             <TableRow display={this.state.display}/>
         </>
         )

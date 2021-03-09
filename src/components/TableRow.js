@@ -4,7 +4,6 @@ import Table from "react-bootstrap/Table";
 //Named it to only be the Table Row, ended up making it the whole table
 //Added react-bootstrap to add Table component
 function TableRow({ display }){
-    console.log(display);
     return(
     <>
         <Table striped bordered hover variant="dark">
