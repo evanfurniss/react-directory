@@ -3,6 +3,7 @@ import SearchForm from "./SearchForm";
 import TableRow from "./TableRow";
 import API from "../utils/API";
 
+// Creates 
 class EmployeeDirectory extends Component {
     state = {
         result: [],
@@ -18,9 +19,17 @@ class EmployeeDirectory extends Component {
             .catch(err => console.log(err))
     }
 
-    searchDirectory = query => {
-        console.log(this.state.search);
-    }
+    searchDirectory = (query) => {
+        const searching = query.toLowerCase().trim();
+        const searchResults = [];
+        this.state.display.filter(({ display }) => {
+            if(display.name.first === searching || display.name.last === searching || display.email === searching || display.cell === searching){
+                searchResults.push(display);
+            };
+            return searchResults;
+        });
+        return(searchResults);
+    };
 
     handleInputChange = event => {
         let value = event.target.value;
@@ -32,7 +41,8 @@ class EmployeeDirectory extends Component {
 
     handleFormSubmit = e => {
         e.preventDefault();
-        this.searchDirectory();
+        console.log();
+        this.searchDirectory(e.target.value);
     };
 
     render() {

@@ -1,5 +1,6 @@
 import React from "react";
 
+//Functional component that returns the the search form
 function SearchForm(props) {
   return (
     <>
