@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * [Installation](#installation)
-* [Description](#discription)
+* [Description](#description)
 * [Contribution](#contribution)
 * [Contact](#contact)
 
